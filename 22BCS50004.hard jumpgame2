@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int n = nums.size();
+        if (n == 1) return 0; // If there's only one element, no jumps needed.
+
+        int jumps = 0;     // Number of jumps taken
+        int farthest = 0;  // Farthest index we can reach
+        int currentEnd = 0; // The end of the current jump range
+        
+        for (int i = 0; i < n - 1; i++) { 
+            farthest = max(farthest, i + nums[i]); // Update the farthest we can reach
+            
+            if (i == currentEnd) { // If we reach the current end, we must jump
+                jumps++;
+                currentEnd = farthest; // Update the range
+                if (currentEnd >= n - 1) break; // If we can reach the last index, stop
+            }
+        }
+        
+        return jumps;
+    }
+};
